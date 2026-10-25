@@ -1,70 +1,43 @@
-# Getting Started with Create React App
+# LetMeGrab
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+LetMeGrab is a responsive product catalog workspace for small business owners. It helps organize product names, categories, descriptions, images, and prices. It is not an ecommerce, ordering, payments, delivery, or stock-tracking system.
 
-## Available Scripts
+## Requirements
 
-In the project directory, you can run:
+- Node.js 20.19+ or 22.12+
+- npm
 
-### `npm start`
+## Run locally
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```sh
+npm install
+npm run dev
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Open the local URL printed by Vite (normally `http://localhost:5173`).
 
-### `npm test`
+## Scripts
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- `npm run dev` starts the Vite development server.
+- `npm run build` creates the production bundle in `dist/`.
+- `npm run preview` serves the production bundle locally.
+- `npm test` runs the Vitest suite once.
 
-### `npm run build`
+## Included workflows
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Create an account, sign in, remember a session, and log out.
+- View dashboard summaries and recently added products.
+- Add, edit, search, sort, filter, and delete products.
+- Upload optional JPG, PNG, or WebP product images up to 3 MB. Image blobs are stored in IndexedDB, not as base64 in LocalStorage.
+- Add, rename, and delete categories. When a category has products, choose another category or Uncategorized before deleting it.
+- Update profile and business preferences, choose currency and theme, export JSON/CSV, and clear the current account catalog.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Local demo data
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+User accounts, profile settings, categories, and product records are stored in this browser. Each account uses a separate catalog key, but data does not synchronize between browsers, devices, or different people. Existing prototype data is migrated on first launch: the old plaintext password is converted to a salted PBKDF2 hash, and old product records are assigned to the first migrated account.
 
-### `npm run eject`
+Authentication is demonstration-only. Passwords are hashed with Web Crypto and are not stored as plaintext, but browser storage is controlled by the user and is not a secure identity system. Before handling real accounts, replace `authService.js` with a server-side authentication service, use secure server-managed sessions, and move catalog data to a database. The forgot-password action is intentionally informational because this local app has no email service.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Data model
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Products are stored with `id`, `name`, `categoryId`, `price`, `image`, `description`, `createdAt`, and `updatedAt`. Categories have `id`, `name`, and `createdAt`. Product image blobs are keyed in IndexedDB; exported JSON includes product records but not image file contents.

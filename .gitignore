@@ -10,6 +10,12 @@
 
 # production
 /build
+/dist
+/src/img/banner1.jpg
+/src/img/banner2.jpg
+/src/img/banner11.jpg
+/src/img/logon.png
+/src/img/market-table.jpg
 
 # misc
 .DS_Store
